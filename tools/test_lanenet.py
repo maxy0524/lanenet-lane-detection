@@ -8,6 +8,12 @@
 """
 test LaneNet model on single image
 """
+
+import sys
+import os
+print(os.getcwd())
+sys.path.append(os.getcwd())
+
 import argparse
 import os.path as ops
 import time
@@ -144,12 +150,19 @@ def test_lanenet(image_path, weights_path, with_lane_fit=True):
 
         plt.figure('mask_image')
         plt.imshow(mask_image[:, :, (2, 1, 0)])
+        plt.savefig('./mask_image.png')
+        
         plt.figure('src_image')
         plt.imshow(image_vis[:, :, (2, 1, 0)])
+        plt.savefig('./src_image.png')
+
         plt.figure('instance_image')
         plt.imshow(embedding_image[:, :, (2, 1, 0)])
+        plt.savefig('./instance_image.png')
+
         plt.figure('binary_image')
         plt.imshow(binary_seg_image[0] * 255, cmap='gray')
+        plt.savefig('./binary_image.png')
         plt.show()
 
     sess.close()
